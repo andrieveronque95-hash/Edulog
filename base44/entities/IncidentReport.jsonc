@@ -1,0 +1,195 @@
+{
+  "name": "IncidentReport",
+  "type": "object",
+  "properties": {
+    "case_number": {
+      "type": "string"
+    },
+    "student_id": {
+      "type": "string"
+    },
+    "student_number": {
+      "type": "string"
+    },
+    "student_name": {
+      "type": "string"
+    },
+    "grade_level": {
+      "type": "string"
+    },
+    "section": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string",
+      "enum": [
+        "Preschool",
+        "Primary",
+        "Secondary",
+        "Junior High School"
+      ]
+    },
+    "incident_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "incident_time": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "default": "Low"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Open",
+        "Under Investigation",
+        "Resolved",
+        "Closed"
+      ],
+      "default": "Open"
+    },
+    "description": {
+      "type": "string"
+    },
+    "persons_involved": {
+      "type": "string"
+    },
+    "witnesses": {
+      "type": "string"
+    },
+    "action_taken": {
+      "type": "string"
+    },
+    "remarks": {
+      "type": "string"
+    },
+    "reported_by_name": {
+      "type": "string"
+    },
+    "reported_by_email": {
+      "type": "string"
+    },
+    "teacher_signature": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "signed_date": {
+          "type": "string"
+        },
+        "file_uri": {
+          "type": "string"
+        }
+      }
+    },
+    "guardian_signature": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "signed_date": {
+          "type": "string"
+        },
+        "file_uri": {
+          "type": "string"
+        }
+      }
+    },
+    "principal_signature": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "signed_date": {
+          "type": "string"
+        },
+        "file_uri": {
+          "type": "string"
+        }
+      }
+    },
+    "attachment_count": {
+      "type": "number",
+      "default": 0
+    },
+    "is_demo": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "case_number",
+    "student_id",
+    "incident_date",
+    "category",
+    "severity",
+    "status"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.reported_by_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

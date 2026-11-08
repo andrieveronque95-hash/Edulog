@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 25% 97%;
+    --foreground: 222 32% 14%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 32% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 32% 14%;
+    --primary: 235 45% 32%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 24% 94%;
+    --secondary-foreground: 222 30% 22%;
+    --muted: 215 22% 95%;
+    --muted-foreground: 220 12% 45%;
+    --accent: 33 62% 94%;
+    --accent-foreground: 25 45% 25%;
+    --destructive: 0 68% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 216 20% 89%;
+    --input: 216 20% 87%;
+    --ring: 235 45% 42%;
+    --radius: 0.75rem;
+    --chart-1: 235 45% 45%;
+    --chart-2: 174 55% 38%;
+    --chart-3: 38 88% 52%;
+    --chart-4: 344 70% 55%;
+    --chart-5: 262 45% 55%;
+    --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-heading: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 30% 22%;
+    --sidebar-primary: 235 45% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 24% 94%;
+    --sidebar-accent-foreground: 222 30% 22%;
+    --sidebar-border: 216 20% 89%;
+    --sidebar-ring: 235 45% 42%;
+  }
+
+  .dark {
+    --background: 224 30% 8%;
+    --foreground: 210 22% 93%;
+    --card: 224 26% 11%;
+    --card-foreground: 210 22% 93%;
+    --popover: 224 26% 11%;
+    --popover-foreground: 210 22% 93%;
+    --primary: 235 62% 68%;
+    --primary-foreground: 224 40% 10%;
+    --secondary: 224 20% 16%;
+    --secondary-foreground: 210 20% 90%;
+    --muted: 224 20% 16%;
+    --muted-foreground: 215 15% 63%;
+    --accent: 224 20% 18%;
+    --accent-foreground: 210 20% 90%;
+    --destructive: 0 62% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 224 18% 20%;
+    --input: 224 18% 22%;
+    --ring: 235 62% 68%;
+    --chart-1: 235 62% 68%;
+    --chart-2: 174 55% 48%;
+    --chart-3: 38 88% 58%;
+    --chart-4: 344 70% 62%;
+    --chart-5: 262 55% 66%;
+    --sidebar-background: 224 26% 11%;
+    --sidebar-foreground: 210 20% 88%;
+    --sidebar-primary: 235 62% 68%;
+    --sidebar-primary-foreground: 224 40% 10%;
+    --sidebar-accent: 224 20% 16%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 224 18% 20%;
+    --sidebar-ring: 235 62% 68%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .surface {
+    @apply rounded-2xl border border-border/70 bg-card;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 18px 40px -32px rgba(15, 23, 42, 0.45);
+  }
+
+  .print-sheet {
+    width: 210mm;
+    min-height: 297mm;
+    box-sizing: border-box;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm;
+  }
+
+  :root,
+  .dark {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 38%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 12%;
+    --border: 0 0% 84%;
+    --primary: 235 45% 32%;
+    --primary-foreground: 0 0% 100%;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-full {
+    padding-left: 0 !important;
+  }
+
+  main {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  .print-sheet {
+    width: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .surface {
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  .print-report > * {
+    break-inside: avoid;
+  }
+}

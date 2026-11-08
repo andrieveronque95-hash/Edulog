@@ -1,0 +1,61 @@
+{
+  "name": "SchoolSettings",
+  "type": "object",
+  "properties": {
+    "school_name": {
+      "type": "string"
+    },
+    "school_address": {
+      "type": "string"
+    },
+    "office_name": {
+      "type": "string"
+    },
+    "principal_name": {
+      "type": "string"
+    },
+    "counselor_name": {
+      "type": "string"
+    },
+    "academic_year": {
+      "type": "string"
+    },
+    "logo_url": {
+      "type": "string"
+    },
+    "report_footer": {
+      "type": "string"
+    }
+  },
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
